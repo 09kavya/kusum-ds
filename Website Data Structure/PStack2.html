@@ -1,0 +1,129 @@
+
+ <!DOCTYPE html>
+<html>
+<head>
+    <title>Program 2</title>
+    <link rel="stylesheet" type="text/css" href="styleDS.css">
+</head>
+<body>
+    <h1>2. Create a stack implementing the operations on the characters array (push, pop, peek, isempty, isfull)</h1>
+    <h3>Code:</h3>
+    <pre>
+        #include <stdio.h>
+
+int isFull(int i, int size) {
+    return i == (size - 1);
+}
+
+int isEmpty(int i) {
+    return i == -1;
+}
+
+int push(char stack[], int size, int i, char value) {
+    if (isFull(i, size)) {
+        printf("Stack is full.\n");
+    } else {
+        stack[++i] = value;
+        printf("%c pushed into stack.\n", value);
+    }
+    return i;
+}
+
+char pop(char stack[], int *i) {
+    if (isEmpty(*i)) {
+        printf("Stack underflow: no element to pop.\n");
+        return '\0';
+    } else {
+        char poppedValue = stack[*i];
+        (*i)--; // Decrement the index
+        printf("%c popped from the stack.\n", poppedValue);
+        return poppedValue;
+    }
+}
+
+char peek(char stack[], int i) {
+    if (isEmpty(i)) {
+        printf("\nStack is empty: no elements to peek.\n");
+        return '\0'; 
+    } else {
+        printf("Top element is %c\n", stack[i]);
+        return stack[i];
+    }
+}
+
+int main() {
+    int choice, size = 10, i = -1;
+    char stack[10], value;
+
+    while (1) {
+        printf("1. Push\n2. Pop\n3. Peek\n4. Exit: ");
+        scanf(" %d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter the character: ");
+                scanf(" %c", &value); 
+                i = push(stack, size, i, value);
+                break;
+            case 2:
+                pop(stack, &i);
+                break;
+            case 3:
+                peek(stack, i);
+                break;
+            case 4:
+                return 0; 
+            default:
+                printf("Entered number is invalid.\n");
+        }
+    }
+}
+
+        
+    </pre>
+    <h3>Output:</h3>
+    <pre> 
+                
+        1.Push
+        2.Pop
+        3.Peek
+        4.Exit:1
+         Enter the character: k
+         k pushed into stack. 
+        1.Push
+        2.Pop
+        3.Peek
+        4.Exit:1
+          Enter the character: u
+          u pushed into stack.
+        1.Push
+        2.Pop
+        3.Peek
+        4.Exit:2
+        u popped from the stack.
+        1.Push
+        2.Pop
+        3.Peek
+        4.Exit:3
+        Top element is k
+        1.Push
+        2.Pop
+        3.Peek
+        4.Exit:7
+        k popped from the stack.
+        2.Pop
+        3.Peek
+        4.Exit:4
+        
+        === Code Exited With Errors ===
+       
+    </pre>
+    <a href="main.html" target="mainFrame" class="button">BACK TO PROGRAM SECTION</a>
+</body>
+</html>
+
+
+
+
+
+

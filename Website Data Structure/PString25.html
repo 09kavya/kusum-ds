@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Program 25</title>
+    <link rel="stylesheet" type="text/css" href="styleDS.css">
+</head>
+<body>
+    <h1>25. Enter the string from the user and trim/eliminate the spaces from both ends (if any).</h1>
+    <h3>Code:</h3>
+    <pre>
+        #include <stdio.h>
+
+            #define MAX_LENGTH 500
+            
+            void trimSpaces(char *str, char *trimmed) {
+                int start = 0, end = 0, i = 0;
+            
+                while (str[start] == ' ') {
+                    start++;
+                }
+            
+              
+                end = start;
+                while (str[end] != '\0') {
+                    end++;
+                }
+                end--; 
+                while (end >= start && str[end] == ' ') {
+                    end--;
+                }
+            
+               
+                for (i = 0; start <= end; i++, start++) {
+                    trimmed[i] = str[start];
+                }
+                trimmed[i] = '\0'; 
+            }
+            
+            int main() {
+                char str[MAX_LENGTH];
+                char trimmed[MAX_LENGTH];
+                printf("Enter a string: ");
+                gets(str);
+                str[strcspn(str, "\n")] = 0;
+                trimSpaces(str, trimmed);
+                printf("Trimmed string: '%s'\n", trimmed);
+                return 0;
+            }
+            
+            
+            
+            
+    </pre>
+    <h3>Output:</h3>
+    <pre>
+        Enter a string:    Hello, World!    
+        Trimmed string: 'Hello, World!'
+
+
+        === Code Execution Successful ===
+    </pre>
+    <a href="main.html" target="mainFrame" class="button">BACK TO PROGRAM SECTION</a>
+</body>
+</html>
+
+
+
+

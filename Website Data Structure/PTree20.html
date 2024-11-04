@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Program 20</title>
+    <link rel="stylesheet" type="text/css" href="styleDS.css">
+</head>
+<body>
+    <h1>20. Count the number of nodes in binary search tree constructed dynamically.</h1>
+    <h3>Code:</h3>
+    <pre>
+        #include <stdio.h>
+            #include <stdlib.h>
+            
+            struct Node {
+                int data;
+                struct Node* left;
+                struct Node* right;
+            };
+            
+            struct Node* newNode(int data) {
+                struct Node* node = (struct Node*)malloc(sizeof(struct Node));
+                node->data = data;
+                node->left = NULL;
+                node->right = NULL;
+                return node;
+            }
+            
+            struct Node* insert(struct Node* root, int data) {
+                if (root == NULL) {
+                    return newNode(data);
+                }
+            
+                if (data < root->data) {
+                    root->left = insert(root->left, data);
+                } else if (data > root->data) {
+                    root->right = insert(root->right, data);
+                }
+            
+                return root;
+            }
+            
+            int countNodes(struct Node* root) {
+                if (root == NULL) {
+                    return 0; 
+                }
+                return 1 + countNodes(root->left) + countNodes(root->right); 
+            }
+            
+            void inorder(struct Node* root) {
+                if (root != NULL) {
+                    inorder(root->left);
+                    printf("%d ", root->data);
+                    inorder(root->right);
+                }
+            }
+            
+            void freeTree(struct Node* root) {
+                if (root != NULL) {
+                    freeTree(root->left);
+                    freeTree(root->right);
+                    free(root);
+                }
+            }
+            
+            int main() {
+                struct Node* root = NULL;
+                int value, n;
+            
+                printf("Enter the number of nodes for the binary search tree: ");
+                scanf("%d", &n);
+            
+                printf("Enter the values for the nodes:\n");
+                for (int i = 0; i < n; i++) {
+                    printf("Node %d: ", i + 1);
+                    scanf("%d", &value);
+                    root = insert(root, value);
+                }
+            
+                printf("Inorder traversal of the constructed BST: ");
+                inorder(root);
+                printf("\n");
+            
+                int count = countNodes(root);
+                printf("Total number of nodes in the BST: %d\n", count);
+            
+                freeTree(root);
+                
+                return 0;
+            }
+            
+            
+            
+    </pre>
+    <h3>Output:</h3>
+    <pre>
+        Enter the number of nodes for the binary search tree: 5
+        Enter the values for the nodes:
+        Node 1: 50
+        Node 2: 30
+        Node 3: 70
+        Node 4: 20
+        Node 5: 40
+        Inorder traversal of the constructed BST: 20 30 40 50 70 
+        Total number of nodes in the BST: 5
+        
+    </pre>
+    <a href="main.html" target="mainFrame" class="button">BACK TO PROGRAM SECTION</a>
+</body>
+</html>
+
+
+
+

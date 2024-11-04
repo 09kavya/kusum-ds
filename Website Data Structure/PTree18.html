@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Program 18</title>
+    <link rel="stylesheet" type="text/css" href="styleDS.css">
+</head>
+<body>
+    <h1>18. Create almost complete binary tree from the given input by the user (dynamically).</h1>
+    <h3>Code:</h3>
+    <pre>
+        #include <stdio.h>
+            #include <stdlib.h>
+            
+            struct Node {
+                int data;
+                struct Node* left;
+                struct Node* right;
+            };
+            
+            struct Node* newNode(int data) {
+                struct Node* node = (struct Node*)malloc(sizeof(struct Node));
+                node->data = data;
+                node->left = NULL;
+                node->right = NULL;
+                return node;
+            }
+            
+            struct Node* insert(struct Node* root, int data) {
+                if (root == NULL) {
+                    return newNode(data);
+                }
+            
+                struct Node** queue = (struct Node**)malloc(100 * sizeof(struct Node*)); 
+                int front = 0, rear = 0;
+            
+                queue[rear++] = root;
+            
+                while (front < rear) {
+                    struct Node* current = queue[front++];
+                    
+                    if (current->left == NULL) {
+                        current->left = newNode(data);
+                        break;
+                    } else {
+                        queue[rear++] = current->left;
+                    }
+            
+                    if (current->right == NULL) {
+                        current->right = newNode(data);
+                        break;
+                    } else {
+                        queue[rear++] = current->right;
+                    }
+                }
+            
+                free(queue); 
+                return root;
+            }
+            
+            void inorder(struct Node* root) {
+                if (root != NULL) {
+                    inorder(root->left);
+                    printf("%d ", root->data);
+                    inorder(root->right);
+                }
+            }
+            
+            void freeTree(struct Node* root) {
+                if (root != NULL) {
+                    freeTree(root->left);
+                    freeTree(root->right);
+                    free(root);
+                }
+            }
+            
+            int main() {
+                struct Node* root = NULL;
+                int value, n;
+            
+                printf("Enter the number of nodes for the almost complete binary tree: ");
+                scanf("%d", &n);
+            
+                printf("Enter the values for the nodes:\n");
+                for (int i = 0; i < n; i++) {
+                    printf("Node %d: ", i + 1);
+                    scanf("%d", &value);
+                    root = insert(root, value);
+                }
+            
+                printf("Inorder traversal of the constructed almost complete binary tree: ");
+                inorder(root);
+                printf("\n");
+            
+                freeTree(root);
+                
+                return 0;
+            }
+            
+            
+            
+    </pre>
+    <h3>Output:</h3>
+    <pre>
+        Enter the number of nodes for the almost complete binary tree: 4
+        Enter the values for the nodes:
+        Node 1: 56
+        Node 2: 67
+        Node 3: 77
+        Node 4: 89
+        Inorder traversal of the constructed almost complete binary tree: 89 67 56 77 
+        
+        
+        === Code Execution Successful ===
+    </pre>
+    <a href="main.html" target="mainFrame" class="button">BACK TO PROGRAM SECTION</a>
+</body>
+</html>
+
+
+
+

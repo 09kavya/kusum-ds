@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Program 3</title>
+    <link rel="stylesheet" type="text/css" href="styleDS.css">
+</head>
+<body>
+    <h1>3. Print left view of binary tree.</h1>
+    <h3>Code:</h3>
+    <pre>
+        #include <stdio.h>
+            #include <stdlib.h>
+            
+            
+            struct Node {
+                int data;
+                struct Node* left;
+                struct Node* right;
+            };
+            
+            struct Node* newNode(int data) {
+                struct Node* node = (struct Node*)malloc(sizeof(struct Node));
+                node->data = data;
+                node->left = node->right = NULL;
+                return node;
+            }
+            
+            void leftViewUtil(struct Node* root, int level, int* maxLevel) {
+                // Base case
+                if (root == NULL) return;
+            
+                if (*maxLevel < level) {
+                    printf("%d ", root->data);
+                    *maxLevel = level;
+                }
+                leftViewUtil(root->left, level + 1, maxLevel);
+                leftViewUtil(root->right, level + 1, maxLevel);
+            }
+            
+            void leftView(struct Node* root) {
+                int maxLevel = 0; 
+                leftViewUtil(root, 1, &maxLevel);
+            }
+            
+            int main() {
+               
+                struct Node* root = newNode(1);
+                root->left = newNode(2);
+                root->right = newNode(3);
+                root->left->left = newNode(4);
+                root->left->right = newNode(5);
+                root->right->left = newNode(6);
+                root->right->right = newNode(7);
+            
+                printf("Left view of the binary tree: ");
+                leftView(root);
+                printf("\n");
+            
+                return 0;
+            }
+            
+            
+    </pre>
+    <h3>Output:</h3>
+    <pre>
+        Left view of the binary tree: 1 2 4 
+
+        === Code Execution Successful ===
+    </pre>
+    <a href="main.html" target="mainFrame" class="button">BACK TO PROGRAM SECTION</a>
+</body>
+</html>
+
+
+
+

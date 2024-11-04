@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Program 10</title>
+    <link rel="stylesheet" type="text/css" href="styleDS.css">
+</head>
+<body>
+    <h1>10. Enter the string from user, enter the index number and print character present on that index.</h1>
+    <h3>Code:</h3>
+    <pre>
+        #include <stdio.h>
+
+            int main() {
+                char string[100]; 
+                int index;
+            
+                // Input the string
+                printf("Enter a string: ");
+                gets(string);
+                printf("Enter the index number: ");
+                scanf("%d", &index);
+            
+                int length = 0;
+                while (string[length] != '\0') 
+                {
+                    length++;
+                }
+            
+                if (index < 0 || index >= length) 
+                {
+                    printf("Index is invalid.\n");
+                } 
+                else 
+                {
+                    printf("Character at index %d: '%c'\n", index, string[index]);
+                }
+            
+                return 0;
+            }
+            
+            
+            
+    </pre>
+    <h3>Output:</h3>
+    <pre>
+        Enter a string: progrms
+        Enter the index number: 4
+        Character at index 4: 'r'
+       
+
+        === Code Execution Successful ===
+    </pre>
+    <a href="main.html" target="mainFrame" class="button">BACK TO PROGRAM SECTION</a>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Program 12</title>
+    <link rel="stylesheet" type="text/css" href="styleDS.css">
+</head>
+<body>
+    <h1>12. Find kth largest element in binary search tree through array.</h1>
+    <h3>Code:</h3>
+    <pre>
+        #include <stdio.h>
+            #include <stdlib.h>
+            
+            
+            struct Node {
+                int data;
+                struct Node* left;
+                struct Node* right;
+            };
+            
+            struct Node* newNode(int data) {
+                struct Node* node = (struct Node*)malloc(sizeof(struct Node));
+                node->data = data;
+                node->left = NULL;
+                node->right = NULL;
+                return node;
+            }
+            
+            void storeInorder(struct Node* root, int* arr, int* index) {
+                if (root == NULL) return;
+            
+                storeInorder(root->left, arr, index);
+                arr[(*index)++] = root->data; 
+                storeInorder(root->right, arr, index);
+            }
+            
+            int kthLargest(struct Node* root, int k) {
+                
+                int* arr = (int*)malloc(100 * sizeof(int));
+                int index = 0;
+                
+                storeInorder(root, arr, &index);
+            
+                if (k > index) {
+                    free(arr);
+                    return -1; 
+                }
+            
+                int kthLargestElement = arr[index - k];
+            
+                free(arr); 
+                return kthLargestElement;
+            }
+            
+            void inorder(struct Node* root) {
+                if (root != NULL) {
+                    inorder(root->left);
+                    printf("%d ", root->data);
+                    inorder(root->right);
+                }
+            }
+            
+            int main() {
+                struct Node* root = newNode(50);
+                root->left = newNode(30);
+                root->right = newNode(70);
+                root->left->left = newNode(20);
+                root->left->right = newNode(40);
+                root->right->left = newNode(60);
+                root->right->right = newNode(80);
+            
+                printf("Inorder traversal of the BST: ");
+                inorder(root);
+                printf("\n");
+            
+                int k = 3; 
+                int result = kthLargest(root, k);
+                if (result != -1) {
+                    printf("The %dth largest element in the BST is: %d\n", k, result);
+                } else {
+                    printf("The value of k is out of bounds.\n");
+                }
+            
+                return 0;
+            }
+            
+            
+    </pre>
+    <h3>Output:</h3>
+    <pre>
+        Inorder traversal of the BST: 20 30 40 50 60 70 80 
+        The 3th largest element in the BST is: 60
+        
+        
+        === Code Execution Successful ===
+    </pre>
+    <a href="main.html" target="mainFrame" class="button">BACK TO PROGRAM SECTION</a>
+</body>
+</html>
+
+
+
+

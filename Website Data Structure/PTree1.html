@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Program 1</title>
+    <link rel="stylesheet" type="text/css" href="styleDS.css">
+</head>
+<body>
+    <h1>1. Construct binary tree from preorder and inorder traversal.</h1>
+    <h3>Code:</h3>
+    <pre>
+        #include <stdio.h>
+            #include <stdlib.h>
+            
+            
+            struct Node {
+                int data;
+                struct Node* left;
+                struct Node* right;
+            };
+            
+            struct Node* newNode(int data) {
+                struct Node* node = (struct Node*)malloc(sizeof(struct Node));
+                node->data = data;
+                node->left = node->right = NULL;
+                return node;
+            }
+            
+            // Function to find the index of a value in the inorder array
+            int search(int inorder[], int start, int end, int value) {
+                for (int i = start; i <= end; i++) {
+                    if (inorder[i] == value) {
+                        return i;
+                    }
+                }
+                return -1; 
+            }
+            
+            struct Node* buildTree(int preorder[], int inorder[], int* preorderIndex, int inorderStart, int inorderEnd) {
+                // Base case
+                if (inorderStart > inorderEnd) {
+                    return NULL;
+                }
+            
+                // Create a new node with the current value from the preorder array
+                struct Node* root = newNode(preorder[*preorderIndex]);
+                (*preorderIndex)++;
+            
+                // If this node has no children, return
+                if (inorderStart == inorderEnd) {
+                    return root;
+                }
+            
+                int inorderIndex = search(inorder, inorderStart, inorderEnd, root->data);
+            
+                root->left = buildTree(preorder, inorder, preorderIndex, inorderStart, inorderIndex - 1);
+                root->right = buildTree(preorder, inorder, preorderIndex, inorderIndex + 1, inorderEnd);
+            
+                return root;
+            }
+            
+            void printInorder(struct Node* node) {
+                if (node == NULL) {
+                    return;
+                }
+                printInorder(node->left);
+                printf("%d ", node->data);
+                printInorder(node->right);
+            }
+            
+            int main() {
+                int preorder[] = {1, 2, 4, 5, 3, 6, 7};
+                int inorder[] = {4, 2, 5, 1, 6, 3, 7};
+                int preorderIndex = 0;
+                int n = sizeof(preorder) / sizeof(preorder[0]);
+            
+                struct Node* root = buildTree(preorder, inorder, &preorderIndex, 0, n - 1);
+            
+                printf("Inorder traversal of the constructed tree: ");
+                printInorder(root);
+                printf("\n");
+            
+                return 0;
+            }
+            
+            
+    </pre>
+    <h3>Output:</h3>
+    <pre>
+      
+        Inorder traversal of the constructed tree: 4 2 5 1 6 3 7 
+        
+        
+        === Code Execution Successful ===
+    </pre>
+    <a href="main.html" target="mainFrame" class="button">BACK TO PROGRAM SECTION</a>
+</body>
+</html>
+
+
+
+

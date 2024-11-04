@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Program 11</title>
+    <link rel="stylesheet" type="text/css" href="styleDS.css">
+</head>
+<body>
+    <h1>11. Enter the string from user and check if it's a palindrome or not.</h1>
+    <h3>Code:</h3>
+    <pre>
+        #include <stdio.h>
+
+            int main() {
+                char string[100];
+                int length = 0, isPalindrome = 1; 
+            
+              
+                printf("Enter a string: ");
+                gets(string);
+            
+                while (string[length] != '\0') {
+                    length++;
+                }
+            
+                // Adjust length to ignore the newline character if present
+                if (length > 0 && string[length - 1] == '\n') {
+                    length--; 
+                }
+            
+                // Check if the string is a palindrome
+                for (int i = 0; i < length / 2; i++) {
+                    if (string[i] != string[length - 1 - i]) {
+                        isPalindrome = 0; 
+                        break; 
+                    }
+                }
+        
+                if (isPalindrome) {
+                    printf("The string is a palindrome.\n");
+                } else {
+                    printf("The string is not a palindrome.\n");
+                }
+            
+                return 0;
+            }
+            
+    </pre>
+    <h3>Output:</h3>
+    <pre>
+        Enter a string: racecar
+        The string is a palindrome.
+
+        === Code Execution Successful ===
+    </pre>
+    <a href="main.html" target="mainFrame" class="button">BACK TO PROGRAM SECTION</a>
+</body>
+</html>
+
+
+
+
