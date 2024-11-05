@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Program 14</title>
+    <link rel="stylesheet" type="text/css" href="styleDS.css">
+</head>
+<body>
+    <h1>14. Enter the string from the user and print the difference of ASCII value of each character</h1>
+    <h3>Code:</h3>
+    <pre>
+        #include <stdio.h>
+
+            int main() {
+                char string[100]; 
+                int i = 0; 
+                printf("Enter a string: ");
+                gets(string); 
+               
+                // Calculate and print the ASCII value differences
+                printf("Differences of ASCII values between consecutive characters:\n");
+                while (string[i] != '\0' && string[i + 1] != '\0') {
+                 
+                    int difference = string[i + 1] - string[i]; 
+                    printf("Difference between '%c' and '%c': %d\n", string[i], string[i + 1], difference);
+                    i++;
+                     
+                }
+            
+                return 0;
+            }
+            
+            
+            
+    </pre>
+    <h3>Output:</h3>
+    <pre>
+        Enter a string: fhs
+        Differences of ASCII values between consecutive characters:
+        Difference between 'f' and 'h': 2
+        Difference between 'h' and 's': 11
+
+        === Code Execution Successful ===
+    </pre>
+    <a href="main.html" target="mainFrame" class="button">BACK TO PROGRAM SECTION</a>
+</body>
+</html>
+
+
+
+

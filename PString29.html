@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Program 29</title>
+    <link rel="stylesheet" type="text/css" href="styleDS.css">
+</head>
+<body>
+    <h1>29. Enter the string from user and convert characters into their ASCII values in the integer array (for example, take 10 characters).</h1>
+    <h3>Code:</h3>
+    <pre>
+        #include <stdio.h>
+
+            int main() {
+                char string[11];  
+                int asciiValues[10];  
+            
+                printf("Enter a string (up to 10 characters): ");
+               gets(string);
+            
+               
+                for (int i = 0; i < 10 && string[i] != '\0'; i++) {
+                    asciiValues[i] = (int)string[i]; 
+                }
+            
+                printf("ASCII values:\n");
+                for (int i = 0; i < 10 && string[i] != '\0'; i++) {
+                    printf("Character: '%c' : ASCII: %d\n", string[i], asciiValues[i]);
+                }
+            
+                return 0;
+            }
+            
+            
+    </pre>
+    <h3>Output:</h3>
+    <pre>
+        Enter a string (up to 10 characters): program data
+        ASCII values:
+        Character: 'p' : ASCII: 112
+        Character: 'r' : ASCII: 114
+        Character: 'o' : ASCII: 111
+        Character: 'g' : ASCII: 103
+        Character: 'r' : ASCII: 114
+        Character: 'a' : ASCII: 97
+        Character: 'm' : ASCII: 109
+        Character: ' ' : ASCII: 32
+        Character: 'd' : ASCII: 100
+        Character: 'a' : ASCII: 97 
+
+        === Code Execution Successful ===
+    </pre>
+    <a href="main.html" target="mainFrame" class="button">BACK TO PROGRAM SECTION</a>
+</body>
+</html>
+
+
+
+

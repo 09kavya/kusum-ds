@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Program 11</title>
+    <link rel="stylesheet" type="text/css" href="styleDS.css">
+</head>
+<body>
+    <h1>11. Create binary tree to binary search tree through array.</h1>
+    <h3>Code:</h3>
+    <pre>
+        #include <stdio.h>
+            #include <stdlib.h>
+            
+            struct Node {
+                int data;
+                struct Node* left;
+                struct Node* right;
+            };
+            
+            struct Node* newNode(int data) {
+                struct Node* node = (struct Node*)malloc(sizeof(struct Node));
+                node->data = data;
+                node->left = NULL;
+                node->right = NULL;
+                return node;
+            }
+            
+            void storeInorder(struct Node* root, int* arr, int* index) {
+                if (root == NULL) return;
+            
+                storeInorder(root->left, arr, index);
+                arr[(*index)++] = root->data; 
+                storeInorder(root->right, arr, index);
+            }
+            
+            int compare(const void* a, const void* b) {
+                return (*(int*)a - *(int*)b);
+            }
+            
+            struct Node* sortedArrayToBST(int* arr, int start, int end) {
+                if (start > end) return NULL;
+            
+                int mid = (start + end) / 2;
+                struct Node* node = newNode(arr[mid]);
+            
+                node->left = sortedArrayToBST(arr, start, mid - 1);
+                node->right = sortedArrayToBST(arr, mid + 1, end);
+            
+                return node;
+            }
+            
+            struct Node* convertToBST(struct Node* root) {
+               
+                int* arr = (int*)malloc(100 * sizeof(int)); 
+                int index = 0;
+                storeInorder(root, arr, &index);
+            
+                qsort(arr, index, sizeof(int), compare);
+            
+                struct Node* newRoot = sortedArrayToBST(arr, 0, index - 1);
+            
+                free(arr); 
+                return newRoot;
+            }
+            
+            void inorder(struct Node* root) {
+                if (root != NULL) {
+                    inorder(root->left);
+                    printf("%d ", root->data);
+                    inorder(root->right);
+                }
+            }
+            
+            int main() {
+                struct Node* root = newNode(10);
+                root->left = newNode(30);
+                root->right = newNode(20);
+                root->left->left = newNode(5);
+                root->left->right = newNode(15);
+                root->right->right = newNode(25);
+            
+                printf("Inorder traversal of original tree: ");
+                inorder(root);
+                printf("\n");
+            
+                struct Node* bstRoot = convertToBST(root);
+            
+                printf("Inorder traversal of converted BST: ");
+                inorder(bstRoot);
+                printf("\n");
+            
+                return 0;
+            }
+            
+            
+    </pre>
+    <h3>Output:</h3>
+    <pre>
+        Inorder traversal of original tree: 5 30 15 10 20 25 
+        Inorder traversal of converted BST: 5 10 15 20 25 30 
+        
+        
+        === Code Execution Successful ===
+    </pre>
+    <a href="main.html" target="mainFrame" class="button">BACK TO PROGRAM SECTION</a>
+</body>
+</html>
+
+
+
+

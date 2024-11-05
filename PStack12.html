@@ -1,0 +1,144 @@
+
+ <!DOCTYPE html>
+<html>
+<head>
+    <title>Program 12</title>
+    <link rel="stylesheet" type="text/css" href="styleDS.css">
+</head>
+<body>
+    <h1>12. Create a program to evaluate the postfix expression.</h1>
+    <h3>Code:</h3>
+    <pre>
+        #include <stdio.h>
+            #include <stdlib.h>
+            #include <ctype.h>
+            #include <string.h>
+            
+            #define MAX 100
+            
+            
+            typedef struct {
+                int items[MAX];
+                int top;
+            } Stack;
+            
+            
+            void initStack(Stack *s) {
+                s->top = -1;
+            }
+            
+            int isFull(Stack *s) {
+                return s->top == MAX - 1;
+            }
+            
+            int isEmpty(Stack *s) {
+                return s->top == -1;
+            }
+            
+            void push(Stack *s, int value) {
+                if (!isFull(s)) {
+                    s->items[++(s->top)] = value;
+                } else {
+                    printf("Stack overflow\n");
+                }
+            }
+            
+            int pop(Stack *s) {
+                if (!isEmpty(s)) {
+                    return s->items[(s->top)--];
+                } else {
+                    printf("Stack underflow\n");
+                    return -1;
+                }
+            }
+            
+            int evaluatePostfix(const char *postfix) {
+                Stack s;
+                initStack(&s);
+                
+               
+                for (int i = 0; postfix[i]; i++) {
+                    char c = postfix[i];
+                   
+                    if (c == ' ') {
+                        continue;
+                    }
+                
+                    if (isdigit(c)) {
+                        int num = 0;
+                        while (i < strlen(postfix) && isdigit(postfix[i])) {
+                            num = num * 10 + (postfix[i] - '0');
+                            i++;
+                        }
+                        push(&s, num);
+                        i--; 
+                    } else { 
+                        int operand2 = pop(&s);
+                        int operand1 = pop(&s);
+                        int result;
+            
+                        switch (c) {
+                            case '+':
+                                result = operand1 + operand2;
+                                break;
+                            case '-':
+                                result = operand1 - operand2;
+                                break;
+                            case '*':
+                                result = operand1 * operand2;
+                                break;
+                            case '/':
+                                if (operand2 != 0) {
+                                    result = operand1 / operand2;
+                                } else {
+                                    printf("Division by zero error\n");
+                                    return -1; // Error value
+                                }
+                                break;
+                            default:
+                                printf("Invalid operator\n");
+                                return -1; 
+                        }
+                        push(&s, result);
+                    }
+                }
+            
+                return pop(&s); 
+            }
+            
+            int main() {
+                char postfix[MAX];
+            
+                printf("Enter a postfix expression: ");
+                fgets(postfix, MAX, stdin);
+                postfix[strcspn(postfix, "\n")] = 0; 
+            
+                int result = evaluatePostfix(postfix);
+            
+                if (result != -1) {
+                    printf("Result: %d\n", result);
+                }
+            
+                return 0;
+            }
+            
+            
+        
+    </pre>
+    <h3>Output:</h3>
+    <pre> 
+        Enter a postfix expression: 2 3 * 4 +
+        Result: 10
+        
+        === Code Execution Successful ===
+             
+    </pre>
+    <a href="main.html" target="mainFrame" class="button">BACK TO PROGRAM SECTION</a>
+</body>
+</html>
+
+
+
+
+
+

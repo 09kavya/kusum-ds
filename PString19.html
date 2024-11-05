@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Program 19</title>
+    <link rel="stylesheet" type="text/css" href="styleDS.css">
+</head>
+<body>
+    <h1>19. Enter the string from the user and convert into a float value.</h1>
+    <h3>Code:</h3>
+    <pre>
+        #include <stdio.h>
+
+            int main() {
+                char string[100]; 
+                float floatValue = 0.0; 
+                int i = 0;
+                int sign = 1; 
+                int decimalPoint = 0; 
+                float decimalFactor = 1.0; 
+            
+                printf("Enter a string representing a float: ");
+               gets(string);
+            
+            
+            
+                
+                while (string[i] != '\0' && string[i] != '\n')
+                {  
+                    if (string[i] >= '0' && string[i] <= '9') {
+                        if (decimalPoint) {
+                            decimalFactor *= 10; // Adjust the factor for decimal
+                            floatValue += (string[i] - '0') / decimalFactor; // Update float value with decimal
+                        } else {
+                            floatValue = floatValue * 10 + (string[i] - '0'); // 
+                        }
+                    } else if (string[i] == '.') {
+                        if (decimalPoint) {
+                            printf("Invalid input: Multiple decimal points.\n");
+                            return 1;
+                        }
+                        decimalPoint = 1; 
+                    } else {
+                        printf("Invalid input: Non-numeric character encountered.\n");
+                        return 1; 
+                    }
+                    i++;
+                }
+            
+                
+                floatValue *= sign;
+            
+               
+                printf("Converted float value: %f\n", floatValue);
+            
+                return 0;
+            }
+            
+            
+    </pre>
+    <h3>Output:</h3>
+    <pre>
+        Enter a string representing a float: 37778
+        Converted float value: 37778.000000
+
+        Enter a string representing a float: kdds
+        Invalid input: Non-numeric character encountered.
+
+        === Code Execution Successful ===
+    </pre>
+    <a href="main.html" target="mainFrame" class="button">BACK TO PROGRAM SECTION</a>
+</body>
+</html>
+
+
+
+

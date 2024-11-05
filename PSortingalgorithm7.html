@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Program 7</title>
+    <link rel="stylesheet" type="text/css" href="styleDS.css">
+</head>
+<body>
+    <h1>7. Enter a integer array from the user and perform merge sort algorithm through iteration. Also calculate the worst and best complexity with exact time.</h1>
+    <h3>Code:</h3>
+    <pre>
+          
+        #include <stdio.h>
+            #include<time.h>
+            #define MAX_SIZE 1000 
+            
+            void merge(int arr[], int left, int mid, int right) {
+                int n1 = mid - left + 1; 
+                int n2 = right - mid;    
+                int L[MAX_SIZE], R[MAX_SIZE];
+            
+                for (int i = 0; i < n1; i++)
+                    L[i] = arr[left + i];
+                for (int j = 0; j < n2; j++)
+                    R[j] = arr[mid + 1 + j];
+            
+                int i = 0; 
+                int j = 0; 
+                int k = left; 
+                while (i < n1 && j < n2) {
+                    if (L[i] <= R[j]) {
+                        arr[k] = L[i];
+                        i++;
+                    } else {
+                        arr[k] = R[j];
+                        j++;
+                    }
+                    k++;
+                }
+            
+                while (i < n1) {
+                    arr[k] = L[i];
+                    i++;
+                    k++;
+                }
+            
+                while (j < n2) {
+                    arr[k] = R[j];
+                    j++;
+                    k++;
+                }
+            }
+            
+            void mergeSortIterative(int arr[], int n) {
+                int current_size; 
+                int left_start;  
+            
+            
+                for (current_size = 1; current_size < n; current_size *= 2) {
+                    for (left_start = 0; left_start < n - 1; left_start += 2 * current_size) {
+                        int mid = left_start + current_size - 1;
+                        int right_end = (left_start + 2 * current_size - 1 < n - 1) ? (left_start + 2 * current_size - 1) : (n - 1);
+            
+                        if (mid < right_end) {
+                            merge(arr, left_start, mid, right_end);
+                        }
+                    }
+                }
+            }
+            
+            void printArray(int arr[], int n) {
+                for (int i = 0; i < n; i++) {
+                    printf("%d ", arr[i]);
+                }
+                printf("\n");
+            }
+            int main() {
+                int n;
+            
+                printf("Enter the number of elements (max %d): ", MAX_SIZE);
+                scanf("%d", &n);
+                
+                if (n > MAX_SIZE) {
+                    printf("Error: Maximum size exceeded.\n");
+                    return 1;
+                }
+                int arr[MAX_SIZE];
+                printf("Enter %d integers:\n", n);
+                for (int i = 0; i < n; i++) {
+                    scanf("%d", &arr[i]);
+                }
+            
+                clock_t start = clock();
+                mergeSortIterative(arr, n);
+                clock_t end = clock();
+            
+                double time_taken = ((double)(end - start)) / CLOCKS_PER_SEC;
+            
+                printf("Sorted array:\n");
+                printArray(arr, n);
+                printf("Time taken for merge sort (worst case): %f seconds\n", time_taken);
+            
+                for (int i = 0; i < n; i++) {
+                    arr[i] = i; 
+                }
+            
+                start = clock();
+                mergeSortIterative(arr, n);
+                end = clock();
+            
+                time_taken = ((double)(end - start)) / CLOCKS_PER_SEC;
+            
+                // Print the sorted array (best case)
+                printf("Sorted array (best case):\n");
+                printArray(arr, n);
+                printf("Time taken for merge sort (best case): %f seconds\n", time_taken);
+            
+                return 0;
+            }
+            
+    
+      
+    </pre>
+    <h3>Output:</h3>
+    <pre>
+        Enter the number of elements (max 1000): 5
+        Enter 5 integers:
+        45
+        78
+        82
+        23
+        12
+        Sorted array:
+        7 8 12 23 45 
+        Time taken for merge sort (worst case): 0.000012 seconds
+        Sorted array (best case):
+        0 1 2 3 4 
+        Time taken for merge sort (best case): 0.000002 seconds
+
+        === Code Execution Successful ===
+    </pre>
+    <a href="main.html" target="mainFrame" class="button">BACK TO PROGRAM SECTION</a>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,143 @@
+
+ <!DOCTYPE html>
+<html>
+<head>
+    <title>Program 7</title>
+    <link rel="stylesheet" type="text/css" href="styleDS.css">
+</head>
+<body>
+    <h1>7. Create two integer stacks in a single array.</h1>
+    <h3>Code:</h3>
+    <pre>
+        #include <stdio.h>
+            #include <stdlib.h>
+            #define MAX 100
+            
+            typedef struct TwoStacks {
+                int arr[MAX];
+                int top1; 
+                int top2; 
+            } TwoStacks;
+            
+            
+            void initStacks(TwoStacks* stacks) {
+                stacks->top1 = -1; 
+                stacks->top2 = MAX; 
+            }
+            
+            int isFullStack1(TwoStacks* stacks) {
+                return stacks->top1 + 1 == stacks->top2;
+            }
+            
+            
+            int isFullStack2(TwoStacks* stacks) {
+                return stacks->top2 - 1 == stacks->top1;
+            }
+            
+            int isEmptyStack1(TwoStacks* stacks) {
+                return stacks->top1 == -1;
+            }
+            
+            int isEmptyStack2(TwoStacks* stacks) {
+                return stacks->top2 == MAX;
+            }
+            
+            void pushStack1(TwoStacks* stacks, int value) {
+                if (!isFullStack1(stacks)) {
+                    stacks->arr[++(stacks->top1)] = value;
+                } else {
+                    printf("Stack 1 overflow: cannot push %d\n", value);
+                }
+            }
+            
+            
+            void pushStack2(TwoStacks* stacks, int value) {
+                if (!isFullStack2(stacks)) {
+                    stacks->arr[--(stacks->top2)] = value;
+                } else {
+                    printf("Stack 2 overflow: cannot push %d\n", value);
+                }
+            }
+            
+            
+            int popStack1(TwoStacks* stacks) {
+                if (!isEmptyStack1(stacks)) {
+                    return stacks->arr[(stacks->top1)--];
+                } else {
+                    printf("Stack 1 underflow: no element to pop.\n");
+                    return -1; 
+                }
+            }
+            
+            int popStack2(TwoStacks* stacks) {
+                if (!isEmptyStack2(stacks)) {
+                    return stacks->arr[(stacks->top2)++];
+                } else {
+                    printf("Stack 2 underflow: no element to pop.\n");
+                    return -1; 
+                }
+            }
+            
+            void displayStack1(TwoStacks* stacks) {
+                printf("Stack 1: ");
+                for (int i = 0; i <= stacks->top1; i++) {
+                    printf("%d ", stacks->arr[i]);
+                }
+                printf("\n");
+            }
+            
+            void displayStack2(TwoStacks* stacks) {
+                printf("Stack 2: ");
+                for (int i = MAX - 1; i >= stacks->top2; i--) {
+                    printf("%d ", stacks->arr[i]);
+                }
+                printf("\n");
+            }
+            
+            int main() {
+                TwoStacks stacks;
+                initStacks(&stacks);
+            
+                pushStack1(&stacks, 10);
+                pushStack1(&stacks, 20);
+                pushStack1(&stacks, 30);
+                displayStack1(&stacks);
+            
+                pushStack2(&stacks, 40);
+                pushStack2(&stacks, 50);
+                pushStack2(&stacks, 60);
+                displayStack2(&stacks);
+            
+                printf("Popped from Stack 1: %d\n", popStack1(&stacks));
+                displayStack1(&stacks);
+            
+                printf("Popped from Stack 2: %d\n", popStack2(&stacks));
+                displayStack2(&stacks);
+            
+                return 0;
+            }
+            
+        
+    </pre>
+    <h3>Output:</h3>
+    <pre> 
+       
+        Stack 1: 10 20 30 
+        Stack 2: 40 50 60 
+        Popped from Stack 1: 30
+        Stack 1: 10 20 
+        Popped from Stack 2: 60
+        Stack 2: 40 50 
+        
+        === Code Execution Successful ===
+             
+    </pre>
+    <a href="main.html" target="mainFrame" class="button">BACK TO PROGRAM SECTION</a>
+</body>
+</html>
+
+
+
+
+
+

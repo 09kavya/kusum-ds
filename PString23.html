@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Program 23</title>
+    <link rel="stylesheet" type="text/css" href="styleDS.css">
+</head>
+<body>
+    <h1>23. Enter a sentence from user and then enter the word and count the occurrence of that word in the sentence.</h1>
+    <h3>Code:</h3>
+    <pre>
+        #include <stdio.h>
+
+            #define MAX_SENTENCE_LENGTH 500
+            #define MAX_WORD_LENGTH 100
+            
+            
+            int compareStrings(const char *str1, const char *str2) {
+                while (*str1 && *str2) {
+                    if (*str1 != *str2) {
+                        return 0; // Strings do not match
+                    }
+                    str1++;
+                    str2++;
+                }
+                return *str2 == '\0'; 
+            }
+            
+            
+            int countOccurrences(const char *sentence, const char *word) {
+                int count = 0;
+                const char *s = sentence;
+                
+                while (*s) {
+                   
+                    while (*s == ' ') {
+                        s++;
+                    }
+            
+                    
+                    if (compareStrings(s, word)) {
+                        count++;
+                      
+                        s += 0; 
+                        while (*s && *s != ' ') {
+                            s++;
+                        }
+                    } else {
+                        s++;
+                    }
+                }
+                return count;
+            }
+            int main() {
+                char sentence[MAX_SENTENCE_LENGTH];
+                char word[MAX_WORD_LENGTH];
+            
+                printf("Enter a sentence: ");
+                gets(sentence);
+                
+              
+                sentence[0] = '\0'; 
+            
+                printf("Enter the word to count: ");
+                gets(word);
+                
+                
+                word[0] = '\0'; 
+            
+                int count = countOccurrences(sentence, word);
+                
+                printf("The word '%s' occurs %d times in the sentence.\n", word, count);
+            
+                return 0;
+            }
+            
+            
+    </pre>
+    <h3>Output:</h3>
+    <pre>
+        Enter a sentence: The cat sat on the mat. The cat is happy.
+        Enter the word to count: cat
+        The word 'cat' occurs 2 times in the sentence.
+        
+        === Code Execution Successful ===
+    </pre>
+    <a href="main.html" target="mainFrame" class="button">BACK TO PROGRAM SECTION</a>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Program 17</title>
+    <link rel="stylesheet" type="text/css" href="styleDS.css">
+</head>
+<body>
+    <h1>17. Enter a string array from the user and perform merge sort algorithm through iteration. Also calculate the worst and best complexity with exact time.</h1>
+    <h3>Code:</h3>
+    <pre>
+        #include <stdio.h>
+            #include <string.h>
+            #include <time.h>
+            
+            #define MAX_SIZE 100 
+            #define MAX_LENGTH 100 
+            
+            
+            void merge(char arr[][MAX_LENGTH], int left, int mid, int right) {
+                int i, j, k;
+                int n1 = mid - left + 1;
+                int n2 = right - mid;
+            
+              
+                char L[MAX_SIZE][MAX_LENGTH], R[MAX_SIZE][MAX_LENGTH];
+            
+                for (i = 0; i < n1; i++)
+                    strcpy(L[i], arr[left + i]);
+                for (j = 0; j < n2; j++)
+                    strcpy(R[j], arr[mid + 1 + j]);
+            
+                i = 0; 
+                j = 0; 
+                k = left; 
+            
+                while (i < n1 && j < n2) {
+                    if (strcmp(L[i], R[j]) <= 0) {
+                        strcpy(arr[k], L[i]);
+                        i++;
+                    } else {
+                        strcpy(arr[k], R[j]);
+                        j++;
+                    }
+                    k++;
+                }
+            
+               
+                while (i < n1) {
+                    strcpy(arr[k], L[i]);
+                    i++;
+                    k++;
+                }
+            
+                while (j < n2) {
+                    strcpy(arr[k], R[j]);
+                    j++;
+                    k++;
+                }
+            }
+            
+            void iterativeMergeSort(char arr[][MAX_LENGTH], int n) {
+                int curr_size; 
+                int left_start;
+            
+                
+                for (curr_size = 1; curr_size <= n - 1; curr_size *= 2) {
+                    for (left_start = 0; left_start < n - 1; left_start += 2 * curr_size) {
+                     
+                        int mid = left_start + curr_size - 1;
+            
+                        int right_end = left_start + 2 * curr_size - 1;
+            
+                        if (right_end >= n) {
+                            right_end = n - 1;
+                        }
+            
+                        if (mid < right_end) {
+                            merge(arr, left_start, mid, right_end);
+                        }
+                    }
+                }
+            }
+            
+            void printArray(char arr[][MAX_LENGTH], int n) {
+                for (int i = 0; i < n; i++) {
+                    printf("%s\n", arr[i]);
+                }
+                printf("\n");
+            }
+            
+            int main() {
+                int n;
+                printf("Enter the number of strings (max %d): ", MAX_SIZE);
+                scanf("%d", &n);
+                getchar(); 
+                if (n > MAX_SIZE) {
+                    printf("Error: Maximum size exceeded.\n");
+                    return 1;
+                }
+            
+                char arr[MAX_SIZE][MAX_LENGTH];
+                printf("Enter %d strings:\n", n);
+                for (int i = 0; i < n; i++) {
+                    gets(arr[i]); 
+                }
+            
+                clock_t start = clock();
+                iterativeMergeSort(arr, n);
+                clock_t end = clock();
+            
+                double time_taken = ((double)(end - start)) / CLOCKS_PER_SEC;
+            
+                printf("Sorted strings:\n");
+                printArray(arr, n);
+                printf("Time taken for iterative merge sort: %f seconds\n", time_taken);
+            
+                return 0;
+            }
+            
+            
+            
+      
+    </pre>
+    <h3>Output:</h3>
+    <pre>
+        Enter the number of strings (max 100): 4
+        Enter 4 strings:
+        pro
+        ex
+        das
+        ta
+        Sorted strings:
+        da
+        ex
+        pro
+        ta
+        
+        Time taken for iterative merge sort: 0.000013 seconds
+
+
+    </pre>
+    <a href="main.html" target="mainFrame" class="button">BACK TO PROGRAM SECTION</a>
+</body>
+</html>
+
+
+
+

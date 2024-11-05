@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Program 26</title>
+    <link rel="stylesheet" type="text/css" href="styleDS.css">
+</head>
+<body>
+    <h1>26. Enter the string from user and split the first word and second word and return the start index of the second word.</h1>
+    <h3>Code:</h3>
+    <pre>
+        #include <stdio.h>
+            #define MAX_LENGTH 500
+            
+            int findSecondWordIndex(const char *str) {
+                int index = 0;
+                while (str[index] != '\0' && str[index] != ' ') {
+                    index++;
+                }
+                while (str[index] == ' ') {
+                    index++;
+                }
+            
+                return (str[index] != '\0') ? index : -1; 
+            }
+            
+            int main() {
+                char str[MAX_LENGTH];
+            
+                printf("Enter a string: ");
+                gets(str);
+            
+                str[strcspn(str, "\n")] = 0;
+            
+                int index = findSecondWordIndex(str);
+            
+                if (index != -1) {
+                    printf("The starting index of the second word is: %d\n", index);
+                } else {
+                    printf("There is no second word in the string.\n");
+                }
+            
+                return 0;
+            }
+            
+            
+            
+            
+    </pre>
+    <h3>Output:</h3>
+    <pre>
+        Enter a string: heello world
+        The starting index of the second word is: 7
+
+        === Code Execution Successful ===
+    </pre>
+    <a href="main.html" target="mainFrame" class="button">BACK TO PROGRAM SECTION</a>
+</body>
+</html>
+
+
+
+
